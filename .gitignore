@@ -1,0 +1,62 @@
+###########################################
+# Visual Studio & IDE Specific Settings
+###########################################
+.vs/                           # Visual Studio temporary files
+.vscode/                       # Visual Studio Code settings
+.idea/                         # JetBrains Rider / IntelliJ IDEA files (if using Rider)
+*.suo                          # Solution user options
+*.user                         # User-specific files
+*.userosscache                 
+*.sln.docstates                # Solution specific document states
+*.userprefs                    # User defined preferences
+
+###########################################
+# Build Results and Intermediate Files
+###########################################
+bin/                           # Build output
+obj/                           # Build intermediate files
+ipch/                          # IntelliSense files
+*.tlog                         # Build logs
+*.log                          # General logs
+TestResults/                   # Unit test results
+
+###########################################
+# .NET Core & NuGet Artifacts
+###########################################
+project.lock.json              # Legacy .NET Core lock file (if present)
+project.fragment.lock.json
+artifacts/                     # Custom build artifacts folder, if any
+.nuget/                       # NuGet package cache and restore folder
+packages/                      # NuGet packages (if restored locally)
+
+###########################################
+# Mobile Platform Specific Artifacts
+###########################################
+# Android artifacts
+*.apk                         # Android Package files
+*.aab                         # Android App Bundles
+
+# iOS / MacCatalyst artifacts
+*.ipa                         # iOS package
+*.app                         # Application bundle
+*.dSYM/                       # Debug symbols for iOS/Mac
+
+###########################################
+# Operating System Files
+###########################################
+.DS_Store                     # macOS system files
+Thumbs.db                     # Windows image cache files
+
+###########################################
+# Temporary and Cache Files
+###########################################
+*.tmp
+*.temp
+*.cache
+
+###########################################
+# Additional Files You May Consider Ignoring
+###########################################
+# Uncomment if you keep local configurations not meant for source control:
+# *.csproj.user
+# *.sln.ide
