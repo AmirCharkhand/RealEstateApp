@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 
 namespace RealEstateApp.Services
 {
-    public class UserApiService(HttpClient httpClient, UriBuilderService uriBuilderService)
+    public class UserApiService(HttpClient httpClient, UriBuilderService uriBuilderService) : IDisposable
     {
         private readonly HttpClient _httpClient = httpClient;
         private readonly UriBuilderService _uriBuilder = uriBuilderService;
@@ -24,6 +24,11 @@ namespace RealEstateApp.Services
                 ?? throw new Exception("Invalid response from server");
 
             return loginToken;
+        }
+
+        public void Dispose()
+        {
+            _httpClient.Dispose();
         }
     }
 }
