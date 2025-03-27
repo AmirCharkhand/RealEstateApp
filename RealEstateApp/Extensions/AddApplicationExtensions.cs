@@ -6,7 +6,8 @@
         {
             return services
                 .AddUriBuilderService()
-                .AddApiConectivityServices();
+                .AddApiConectivityServices()
+                .AddAppPages();
         }
     }
 }

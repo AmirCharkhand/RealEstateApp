@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:RealEstateApp.ViewModels"
+             x:Class="RealEstateApp.Views.LoginPage"
+             x:DataType="viewModel:LoginViewModel"
+             Title="{Binding Title}">
+
+    <Grid RowDefinitions="*,4*">
+        <VerticalStackLayout Grid.Row="1"
+                             HorizontalOptions="Fill"
+                             Spacing="25"
+                             Padding="20,0,20,0">
+            <VerticalStackLayout Spacing="15">
+                <Image Source="dotnet_bot.png"
+                       HeightRequest="150"/>
+                <Label Text="Welcome to Real Estate App"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Large"
+                       FontAttributes="Bold"/>
+                <Label Text="Please Login to start using app"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Small"
+                       TextColor="DimGray"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="15">
+                <Entry Placeholder="Email"/>
+                <Entry Placeholder="Password"
+                       IsPassword="True"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Margin="0,10,0,0">
+                <Button Text="Sign in"
+                        HeightRequest="50"
+                        FontSize="Medium"/>
+                <HorizontalStackLayout HorizontalOptions="Center"
+                                       Padding="15"
+                                       Spacing="5">
+                    <Label Text="Not Member?"
+                           FontSize="Medium"/>
+                    <Label Text="Join Now"
+                           FontSize="Medium"
+                           TextColor="Blue"
+                           TextDecorations="Underline"/>
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
