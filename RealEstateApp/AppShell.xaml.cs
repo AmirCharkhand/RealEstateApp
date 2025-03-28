@@ -8,6 +8,7 @@ namespace RealEstateApp
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(RegisterNewUserPage), typeof(RegisterNewUserPage));
         }
     }
 }

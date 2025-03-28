@@ -9,7 +9,9 @@ namespace RealEstateApp.Extensions
         {
             return services
                 .AddTransient<LoginPage>()
-                .AddTransient<LoginViewModel>();
+                .AddTransient<LoginViewModel>()
+                .AddTransient<RegisterNewUserPage>()
+                .AddTransient<RegisterNewUserViewModel>();
         }
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:RealEstateApp.ViewModels"
+             x:Class="RealEstateApp.Views.RegisterNewUserPage"
+             x:DataType="viewModel:RegisterNewUserViewModel"
+             Title="{Binding Title}">
+    
+    <VerticalStackLayout VerticalOptions="Center"
+                         Spacing="15"
+                         Margin="20,0,20,0">
+        <VerticalStackLayout Spacing="15">
+            <Image Source="dotnet_bot.png"
+                   HeightRequest="150"/>
+            <Label Text="Create A new account"
+                   HorizontalTextAlignment="Center"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+            <Label Text="Please Enter your Information below to Create A new account for using the App"
+                   HorizontalTextAlignment="Center"
+                   FontSize="Small"
+                   TextColor="DimGray"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout Spacing="15">
+            <Entry Placeholder="Full Name"/>
+            <Entry Placeholder="Email"/>
+            <Entry Placeholder="Phone"/>
+            <Entry Placeholder="Password"
+                   IsPassword="True"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout Spacing="15"
+                             Margin="0,10,0,0">
+            <Button Text="Sign Up"
+                    HeightRequest="50"
+                    FontSize="Medium"/>
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="5">
+                <Label Text="Not Member?"
+                           FontSize="Medium"/>
+                <Label Text="Join Now"
+                           FontSize="Medium"
+                           TextColor="Blue"
+                           TextDecorations="Underline"/>
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer/>
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
