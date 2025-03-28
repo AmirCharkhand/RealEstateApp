@@ -54,6 +54,6 @@ Thumbs.db
 ###########################################
 # Additional Files You May Consider Ignoring
 ###########################################
-# Uncomment if you keep local configurations not meant for source control:
-# *.csproj.user
-# *.sln.ide
+*.csproj.user
+*.sln.ide
+*.sln
