@@ -11,7 +11,9 @@ namespace RealEstateApp.Extensions
                 .AddTransient<LoginPage>()
                 .AddTransient<LoginViewModel>()
                 .AddTransient<RegisterNewUserPage>()
-                .AddTransient<RegisterNewUserViewModel>();
+                .AddTransient<RegisterNewUserViewModel>()
+                .AddSingleton<HomePage>()
+                .AddSingleton<HomePageViewModel>();
         }
     }
 }
