@@ -2,7 +2,7 @@
 
 namespace RealEstateApp.Services
 {
-    class LoginInfoStorageService
+    public class LoginInfoStorageService
     {
         public async Task SaveLoginInfoAsync(LoginToken loginToken)
         {
