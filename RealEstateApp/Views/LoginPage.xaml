@@ -24,14 +24,17 @@
                        TextColor="DimGray"/>
             </VerticalStackLayout>
             <VerticalStackLayout Spacing="15">
-                <Entry Placeholder="Email"/>
+                <Entry Placeholder="Email"
+                       Text="{Binding Email}"/>
                 <Entry Placeholder="Password"
-                       IsPassword="True"/>
+                       IsPassword="True"
+                       Text="{Binding Password}"/>
             </VerticalStackLayout>
             <VerticalStackLayout Margin="0,10,0,0">
                 <Button Text="Sign in"
                         HeightRequest="50"
-                        FontSize="Medium"/>
+                        FontSize="Medium"
+                        Command="{Binding LoginCommand}"/>
                 <HorizontalStackLayout HorizontalOptions="Center"
                                        Padding="15"
                                        Spacing="5">
@@ -42,7 +45,7 @@
                            TextColor="Blue"
                            TextDecorations="Underline"/>
                     <HorizontalStackLayout.GestureRecognizers>
-                        <TapGestureRecognizer/>
+                        <TapGestureRecognizer Command="{Binding GotoRegisterPageCommand}"/>
                     </HorizontalStackLayout.GestureRecognizers>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
