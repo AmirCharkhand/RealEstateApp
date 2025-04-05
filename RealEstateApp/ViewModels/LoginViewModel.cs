@@ -35,7 +35,7 @@ namespace RealEstateApp.ViewModels
                 // Save the login token to secure storage
                 await _loginInfoStorageService.SaveLoginInfoAsync(loginToken);
                 // Navigate to the home page
-                await Shell.Current.GoToAsync(nameof(HomePage));
+                await Shell.Current.GoToAsync("//HomePage");
             }
             catch (Exception ex)
             {

@@ -7,9 +7,7 @@ namespace RealEstateApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(RegisterNewUserPage), typeof(RegisterNewUserPage));
-            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
         }
     }
 }
