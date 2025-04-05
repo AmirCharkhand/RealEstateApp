@@ -13,7 +13,9 @@ namespace RealEstateApp.Extensions
                 .AddTransient<RegisterNewUserPage>()
                 .AddTransient<RegisterNewUserViewModel>()
                 .AddSingleton<HomePage>()
-                .AddSingleton<HomePageViewModel>();
+                .AddSingleton<HomePageViewModel>()
+                .AddSingleton<BookmarksPage>()
+                .AddSingleton<SettingsPage>();
         }
     }
 }
