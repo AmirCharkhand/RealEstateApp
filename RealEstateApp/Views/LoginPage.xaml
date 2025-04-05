@@ -34,7 +34,8 @@
                 <Button Text="Sign in"
                         HeightRequest="50"
                         FontSize="Medium"
-                        Command="{Binding LoginCommand}"/>
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
                 <HorizontalStackLayout HorizontalOptions="Center"
                                        Padding="15"
                                        Spacing="5">

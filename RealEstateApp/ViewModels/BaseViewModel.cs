@@ -6,7 +6,11 @@ namespace RealEstateApp.ViewModels
     {
         [ObservableProperty]
         private string _title = string.Empty;
+
         [ObservableProperty]
+        [NotifyPropertyChangedFor("IsNotBusy")]
         private bool _isBusy;
+
+        public bool IsNotBusy => !IsBusy;
     }
 }
