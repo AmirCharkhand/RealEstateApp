@@ -1,13 +1,27 @@
-﻿using RealEstateApp.Views;
+﻿using RealEstateApp.Services;
+using RealEstateApp.Views;
 
 namespace RealEstateApp
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        private readonly LoginInfoStorageService _loginInfoStorageService;
+        public AppShell(LoginInfoStorageService loginInfoStorageService)
         {
+            _loginInfoStorageService = loginInfoStorageService;
             InitializeComponent();
             Routing.RegisterRoute(nameof(RegisterNewUserPage), typeof(RegisterNewUserPage));
+        }
+
+        protected async override void OnAppearing()
+        {
+            var isLoginTokenValid = await _loginInfoStorageService.IsLoginTokenValid();
+            if (isLoginTokenValid)
+                await Shell.Current.GoToAsync("//HomePage");
+            else
+                await Shell.Current.GoToAsync("//LoginPage");
+
+            base.OnAppearing();
         }
     }
 }
