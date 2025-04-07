@@ -22,27 +22,33 @@
                    TextColor="DimGray"/>
         </VerticalStackLayout>
         <VerticalStackLayout Spacing="15">
-            <Entry Placeholder="Full Name"/>
-            <Entry Placeholder="Email"/>
-            <Entry Placeholder="Phone"/>
+            <Entry Placeholder="Full Name"
+                   Text="{Binding Name}"/>
+            <Entry Placeholder="Email"
+                   Text="{Binding Email}"/>
+            <Entry Placeholder="Phone"
+                   Text="{Binding Phone}"/>
             <Entry Placeholder="Password"
+                   Text="{Binding Password}"
                    IsPassword="True"/>
         </VerticalStackLayout>
         <VerticalStackLayout Spacing="15"
                              Margin="0,10,0,0">
             <Button Text="Sign Up"
                     HeightRequest="50"
-                    FontSize="Medium"/>
+                    FontSize="Medium"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Command="{Binding RegisterUserCommand}"/>
             <HorizontalStackLayout HorizontalOptions="Center"
                                    Spacing="5">
-                <Label Text="Not Member?"
+                <Label Text="Already A Member?"
                            FontSize="Medium"/>
-                <Label Text="Join Now"
+                <Label Text="Login!"
                            FontSize="Medium"
                            TextColor="Blue"
                            TextDecorations="Underline"/>
                 <HorizontalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer Command="{Binding GoToLoginPageCommand}"/>
                 </HorizontalStackLayout.GestureRecognizers>
             </HorizontalStackLayout>
         </VerticalStackLayout>
