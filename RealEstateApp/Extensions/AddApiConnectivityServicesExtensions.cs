@@ -1,6 +1,5 @@
-﻿using RealEstateApp.Exceptions;
-using RealEstateApp.Services;
-using System.Net.Http.Headers;
+﻿using RealEstateApp.Services;
+using RealEstateApp.Services.Handlers;
 
 namespace RealEstateApp.Extensions
 {
@@ -8,23 +7,17 @@ namespace RealEstateApp.Extensions
     {
         public static IServiceCollection AddApiConectivityServices(this IServiceCollection services)
         {
+            services.AddTransient<AuthenticationDelegatingHandler>();
+
             services.AddHttpClient<UserApiService>();
-            services.AddHttpClient<CateroryApiService>(async (sp, c) =>
-            {
-                var loginInfoStorage = sp.GetRequiredService<LoginInfoStorageService>();
-                var loginToken = await loginInfoStorage.GetLoginInfoAsync()
-                    ?? throw new UserLoginException();
 
-                c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginToken.AccessToken);
-            });
-            services.AddHttpClient<PropertyApiService>(async (sp, c) =>
-            {
-                var loginInfoStorage = sp.GetRequiredService<LoginInfoStorageService>();
-                var loginToken = await loginInfoStorage.GetLoginInfoAsync()
-                    ?? throw new UserLoginException();
+            services
+                .AddHttpClient<CategoryApiService>()
+                .AddHttpMessageHandler<AuthenticationDelegatingHandler>();
 
-                c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginToken.AccessToken);
-            });
+            services
+                .AddHttpClient<PropertyApiService>()
+                .AddHttpMessageHandler<AuthenticationDelegatingHandler>();
 
             return services;
         }
