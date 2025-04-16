@@ -5,6 +5,7 @@ namespace RealEstateApp.Services
 {
     public class LoginInfoStorageService
     {
+        private LoginToken? _loginToken;
         public async Task SaveLoginInfoAsync(LoginToken loginToken)
         {
             await SecureStorage.SetAsync("AccessToken", loginToken.AccessToken);
@@ -14,41 +15,47 @@ namespace RealEstateApp.Services
 
         public async Task<LoginToken?> GetLoginInfoAsync()
         {
-            var accessToken = await SecureStorage.GetAsync("AccessToken");
-            var userId = await SecureStorage.GetAsync("UserId");
-            var userName = await SecureStorage.GetAsync("UserName");
+            if (_loginToken != null)
+                return _loginToken;
 
-            if (accessToken == null || userId == null || userName == null) 
-                return null;
-
-            return new LoginToken(accessToken, int.Parse(userId), userName);
+            _loginToken = await GetTokenFromSecureStorage();
+            return _loginToken;
         }
 
         public async Task<bool> IsLoginTokenValid()
         {
-            var accessToken = await SecureStorage.GetAsync("AccessToken");
-            var userId = await SecureStorage.GetAsync("UserId");
-            var userName = await SecureStorage.GetAsync("UserName");
-            if (accessToken == null || userId == null || userName == null)
+            var token = await GetTokenFromSecureStorage();
+            if (token == null)
                 return false;
 
             var tokenExpiration = new JwtSecurityTokenHandler()
-                .ReadJwtToken(accessToken)
+                .ReadJwtToken(token.AccessToken)
                 .ValidTo;
             if (tokenExpiration < DateTime.UtcNow + TimeSpan.FromHours(1))
             {
-                ClearLoginInfoAsync();
+                ClearLoginInfo();
                 return false;
             }
 
             return true;
         }
 
-        public void ClearLoginInfoAsync()
+        public void ClearLoginInfo()
         {
             SecureStorage.Remove("AccessToken");
             SecureStorage.Remove("UserId");
             SecureStorage.Remove("UserName");
+            _loginToken = null;
+        }
+
+        private async Task<LoginToken?> GetTokenFromSecureStorage()
+        {
+            var accessToken = await SecureStorage.GetAsync("AccessToken");
+            var userId = await SecureStorage.GetAsync("UserId");
+            var userName = await SecureStorage.GetAsync("UserName");
+            if (accessToken == null || userId == null || userName == null)
+                return null;
+            return new LoginToken(accessToken, int.Parse(userId), userName);
         }
     }
 }
