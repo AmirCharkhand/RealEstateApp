@@ -11,6 +11,7 @@ namespace RealEstateApp
             _loginInfoStorageService = loginInfoStorageService;
             InitializeComponent();
             Routing.RegisterRoute(nameof(RegisterNewUserPage), typeof(RegisterNewUserPage));
+            Routing.RegisterRoute(nameof(PropertiesListPage), typeof(PropertiesListPage));
         }
 
         protected async override void OnAppearing()

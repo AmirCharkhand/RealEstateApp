@@ -29,7 +29,9 @@
                        FontAttributes="Bold"/>
                 <CollectionView HeightRequest="50"
                                 SelectionMode="Single"
-                                ItemsSource="{Binding Categories}">
+                                ItemsSource="{Binding Categories}"
+                                SelectedItem="{Binding SelectedCategory}"
+                                SelectionChangedCommand="{Binding GoToPropertiesListPageCommand}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="20"
                                            Orientation="Horizontal"/>

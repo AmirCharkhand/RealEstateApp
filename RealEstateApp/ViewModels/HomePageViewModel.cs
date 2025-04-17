@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using RealEstateApp.Exceptions;
 using RealEstateApp.Models;
 using RealEstateApp.Services;
+using RealEstateApp.Views;
 using System.Collections.ObjectModel;
 
 namespace RealEstateApp.ViewModels
@@ -17,6 +18,8 @@ namespace RealEstateApp.ViewModels
 
         [ObservableProperty]
         private string _username;
+        [ObservableProperty]
+        private Category _selectedCategory;
 
         public ObservableCollection<Category> Categories { get; init; } = new ObservableCollection<Category>();
         public ObservableCollection<Property> TrendingProperties { get; init; } = new ObservableCollection<Property>();
@@ -96,6 +99,20 @@ namespace RealEstateApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        private async Task GoToPropertiesListPage()
+        {
+            if (SelectedCategory == null)
+                return;
+
+            var queryParameters = new Dictionary<string, object>
+            {
+                { nameof(Category), SelectedCategory }
+            };
+
+            await Shell.Current.GoToAsync(nameof(PropertiesListPage), true, queryParameters);
         }
     }
 }
