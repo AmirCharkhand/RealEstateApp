@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 
 namespace RealEstateApp.Services
 {
-    public class CateroryApiService (HttpClient httpClient, UriBuilderService uriBuilderService) : IDisposable
+    public class CategoryApiService (HttpClient httpClient, UriBuilderService uriBuilderService) : IDisposable
     {
         private readonly HttpClient _httpClient = httpClient;
         private readonly UriBuilderService _uriBuilder = uriBuilderService;
