@@ -7,11 +7,10 @@ using System.Collections.ObjectModel;
 
 namespace RealEstateApp.ViewModels
 {
-    public partial class PropertiesListViewModel : BaseViewModel, IQueryAttributable
+    public partial class PropertiesListViewModel(IServiceProvider serviceProvider) : BaseViewModel, IQueryAttributable
     {
         private Category? _category;
-        private readonly IServiceProvider _serviceProvider;
-
+        private readonly IServiceProvider _serviceProvider = serviceProvider;
         private PropertyApiService PropertyApiService => _serviceProvider.GetRequiredService<PropertyApiService>();
 
         [ObservableProperty]
@@ -19,15 +18,12 @@ namespace RealEstateApp.ViewModels
 
         public ObservableCollection<Property> Properties { get; init; } = new ObservableCollection<Property>();
 
-        public PropertiesListViewModel(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+        public void ApplyQueryAttributes(IDictionary<string, object> query) => _category = query[nameof(Category)] as Category;
 
-        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async Task InitializeAsync()
         {
-            _category = query[nameof(Category)] as Category
-                ?? throw new ArgumentNullException(nameof(Category), "Category cannot be null");
+            if (_category == null)
+                throw new ArgumentNullException(nameof(Category), "Category cannot be null");
             this.Title = $"Properties in {_category.Name} category";
             await SetPropertiesByCategoryId(_category.Id);
         }
