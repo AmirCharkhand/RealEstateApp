@@ -5,7 +5,7 @@
              xmlns:models="clr-namespace:RealEstateApp.Models"
              x:Class="RealEstateApp.Views.PropertiesListPage"
              x:DataType="viewModels:PropertiesListViewModel"
-             Title="{Binding Title}">
+             Shell.PresentationMode="ModalAnimated">
     <Grid Margin="10,0,10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -32,11 +32,11 @@
                          Command="{Binding GoBackCommand}"/>
 
             <Label Grid.Column="1"
-                   Text="Property List"
+                   Text="{Binding Title}"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Start"
-                   FontSize="Large" />
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   FontSize="Medium"/>
         </Grid>
         <CollectionView  Margin="10"
                          SelectionMode="Single"

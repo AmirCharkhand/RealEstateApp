@@ -54,5 +54,11 @@ namespace RealEstateApp.ViewModels
             // Todo: Implement the logic to navigate to the property details page
             await Task.CompletedTask;
         }
+
+        [RelayCommand]
+        private async Task GoBack()
+        {
+            await Shell.Current.GoToAsync("..");
+        }
     }
 }
