@@ -20,7 +20,7 @@ public partial class PropertiesListPage : ContentPage
         }
         else
         {
-            throw new InvalidOperationException("BindingContext is not of type PropertiesListViewModel");
+            throw new InvalidOperationException($"BindingContext is not of type {typeof(PropertiesListViewModel)}");
         }
     }
 }

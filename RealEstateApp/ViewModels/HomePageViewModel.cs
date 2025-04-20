@@ -8,10 +8,10 @@ using System.Collections.ObjectModel;
 
 namespace RealEstateApp.ViewModels
 {
-    public partial class HomePageViewModel : BaseViewModel
+    public partial class HomePageViewModel(LoginInfoStorageService loginInfoStorageService, IServiceProvider serviceProvider) : BaseViewModel
     {
-        private readonly LoginInfoStorageService _loginInfoStorageService;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly LoginInfoStorageService _loginInfoStorageService = loginInfoStorageService;
+        private readonly IServiceProvider _serviceProvider = serviceProvider;
 
         private CategoryApiService CategoryApiService => _serviceProvider.GetRequiredService<CategoryApiService>();
         private PropertyApiService PropertyApiService => _serviceProvider.GetRequiredService<PropertyApiService>();
@@ -24,13 +24,14 @@ namespace RealEstateApp.ViewModels
         public ObservableCollection<Category> Categories { get; init; } = new ObservableCollection<Category>();
         public ObservableCollection<Property> TrendingProperties { get; init; } = new ObservableCollection<Property>();
 
-        public HomePageViewModel(LoginInfoStorageService loginInfoStorageService, IServiceProvider serviceProvider)
+        public async Task InitializeAsync()
         {
-            _loginInfoStorageService = loginInfoStorageService;
-            _serviceProvider = serviceProvider;
+            await Task.WhenAll(
+                SetUserInfo(),
+                SetCategories(),
+                SetTrendingProperties());
         }
 
-        [RelayCommand]
         private async Task SetUserInfo()
         {
             var loginInfo = await _loginInfoStorageService.GetLoginInfoAsync();
@@ -43,7 +44,6 @@ namespace RealEstateApp.ViewModels
             }
         }
 
-        [RelayCommand]
         private async Task SetCategories()
         {
             if (Categories.Count > 0)
@@ -72,7 +72,6 @@ namespace RealEstateApp.ViewModels
             }
         }
 
-        [RelayCommand]
         private async Task SetTrendingProperties()
         {
             if (TrendingProperties.Count > 0)

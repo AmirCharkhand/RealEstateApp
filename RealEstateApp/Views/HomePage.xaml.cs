@@ -4,21 +4,22 @@ namespace RealEstateApp.Views;
 
 public partial class HomePage : ContentPage
 {
-	private readonly HomePageViewModel _viewModel;
     public HomePage(HomePageViewModel viewModel)
 	{
-		InitializeComponent();
         BindingContext = viewModel;
-        _viewModel = viewModel;
+		InitializeComponent();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await Task.WhenAll(
-            _viewModel.SetCategoriesCommand.ExecuteAsync(null),
-            _viewModel.SetUserInfoCommand.ExecuteAsync(null),
-            _viewModel.SetTrendingPropertiesCommand.ExecuteAsync(null)
-        );
+        if (BindingContext is HomePageViewModel viewModel)
+        {
+            await viewModel.InitializeAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException($"BindingContext is not of type {typeof(HomePageViewModel)}");
+        }
     }
 }
