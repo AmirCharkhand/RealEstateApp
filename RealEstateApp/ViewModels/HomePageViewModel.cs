@@ -19,7 +19,7 @@ namespace RealEstateApp.ViewModels
         [ObservableProperty]
         private string _username;
         [ObservableProperty]
-        private Category _selectedCategory;
+        private Category? _selectedCategory;
 
         public ObservableCollection<Category> Categories { get; init; } = new ObservableCollection<Category>();
         public ObservableCollection<Property> TrendingProperties { get; init; } = new ObservableCollection<Property>();
@@ -112,6 +112,7 @@ namespace RealEstateApp.ViewModels
             };
 
             await Shell.Current.GoToAsync(nameof(PropertiesListPage), true, queryParameters);
+            SelectedCategory = null;
         }
     }
 }
