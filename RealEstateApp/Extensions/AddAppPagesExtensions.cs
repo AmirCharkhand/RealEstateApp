@@ -16,6 +16,8 @@ namespace RealEstateApp.Extensions
                 .AddSingleton<HomePageViewModel>()
                 .AddTransient<PropertiesListPage>()
                 .AddTransient<PropertiesListViewModel>()
+                .AddTransient<PropertyDetailsPage>()
+                .AddTransient<PropertyDetailsViewModel>()
                 .AddSingleton<BookmarksPage>()
                 .AddSingleton<SettingsPage>();
         }

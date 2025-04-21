@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using RealEstateApp.Exceptions;
 using RealEstateApp.Models;
 using RealEstateApp.Services;
+using RealEstateApp.Views;
 using System.Collections.ObjectModel;
 
 namespace RealEstateApp.ViewModels
@@ -14,7 +15,7 @@ namespace RealEstateApp.ViewModels
         private PropertyApiService PropertyApiService => _serviceProvider.GetRequiredService<PropertyApiService>();
 
         [ObservableProperty]
-        private Property _selectedProperty;
+        private Property? _selectedProperty;
 
         public ObservableCollection<Property> Properties { get; init; } = new ObservableCollection<Property>();
 
@@ -30,8 +31,12 @@ namespace RealEstateApp.ViewModels
 
         private async Task SetPropertiesByCategoryId(int categoryId)
         {
+            if (Properties.Count >0)
+                return;
+
             try
             {
+                IsBusy = true;
                 var properties = await PropertyApiService.GetPropertiesAsync(categoryId);
                 foreach (var property in properties)
                     Properties.Add(property);
@@ -46,13 +51,19 @@ namespace RealEstateApp.ViewModels
                 await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
                 await Shell.Current.GoToAsync("//LoginPage");
             }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]
         private async Task GoToPropertyDetails()
         {
-            // Todo: Implement the logic to navigate to the property details page
-            await Task.CompletedTask;
+            if (SelectedProperty == null)
+                return;
+            await Shell.Current.GoToAsync($"{nameof(PropertyDetailsPage)}?{nameof(PropertyDetailsViewModel.PropertyId)}={SelectedProperty.Id}");
+            SelectedProperty = null;
         }
 
         [RelayCommand]
