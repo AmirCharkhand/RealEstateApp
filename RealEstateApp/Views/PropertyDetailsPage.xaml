@@ -78,14 +78,16 @@
                     BackgroundColor="#2A5F73"
                     ImageSource="message_icon.png"
                     FontSize="Medium"
-                    Text="Message"/>
+                    Text="Message"
+                    Command="{Binding SendMessageCommand}"/>
             <Button HeightRequest="60"
                     WidthRequest="150"
                     CornerRadius="35"
                     BackgroundColor="#2A5F73"
                     ImageSource="phone_icon.png"
                     FontSize="Medium"
-                    Text="Call"/>
+                    Text="Call"
+                    Command="{Binding CallCommand}"/>
 
         </HorizontalStackLayout>
     </Grid>

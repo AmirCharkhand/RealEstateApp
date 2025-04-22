@@ -50,5 +50,25 @@ namespace RealEstateApp.ViewModels
         {
             await Shell.Current.GoToAsync("..");
         }
+
+        [RelayCommand]
+        private async Task Call()
+        {
+            if (Property == null)
+                throw new ArgumentNullException(nameof(Property));
+            PhoneDialer.Open(Property.Phone);
+            await Task.CompletedTask;
+        }
+
+        [RelayCommand]
+        private async Task SendMessage()
+        {
+            if (Property == null) 
+                throw new ArgumentNullException(nameof(Property));
+            var message = new SmsMessage(
+                $"Hi! I'm interested in your {Property.Name} property in {Property.Address}. Is it yet aveailable?",
+                Property.Phone);
+            await Sms.ComposeAsync(message);
+        }
     }
 }
