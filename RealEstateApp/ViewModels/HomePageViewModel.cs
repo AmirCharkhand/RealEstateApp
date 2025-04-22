@@ -20,6 +20,8 @@ namespace RealEstateApp.ViewModels
         private string _username;
         [ObservableProperty]
         private Category? _selectedCategory;
+        [ObservableProperty]
+        private Property? _selectedProperty;
 
         public ObservableCollection<Category> Categories { get; init; } = new ObservableCollection<Category>();
         public ObservableCollection<Property> TrendingProperties { get; init; } = new ObservableCollection<Property>();
@@ -113,6 +115,16 @@ namespace RealEstateApp.ViewModels
 
             await Shell.Current.GoToAsync(nameof(PropertiesListPage), true, queryParameters);
             SelectedCategory = null;
+        }
+
+        [RelayCommand]
+        private async Task GotoPropertyDetailsPage()
+        {
+            if (SelectedProperty == null)
+                return;
+
+            await Shell.Current.GoToAsync($"{nameof(PropertyDetailsPage)}?{nameof(PropertyDetailsViewModel.PropertyId)}={SelectedProperty.Id}");
+            SelectedProperty = null;
         }
     }
 }
