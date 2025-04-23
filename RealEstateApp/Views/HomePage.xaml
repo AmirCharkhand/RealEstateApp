@@ -21,7 +21,21 @@
                        HorizontalTextAlignment="Start" />
             </VerticalStackLayout>
 
-            <SearchBar BackgroundColor="GhostWhite"/>
+            <Border Padding="15"
+                    BackgroundColor="#ECECEC">
+                <HorizontalStackLayout Spacing="20">
+                    <Image Source="search_icon"
+                           Aspect="AspectFit"
+                           HeightRequest="20"
+                           WidthRequest="20" />
+                    <Label Text="Search..."
+                           VerticalOptions="Center"
+                           TextColor="#848484" />
+                </HorizontalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoSearchPageCommand}"/>
+                </Border.GestureRecognizers>
+            </Border>
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Categories"

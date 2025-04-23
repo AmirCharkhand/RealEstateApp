@@ -13,6 +13,7 @@ namespace RealEstateApp
             Routing.RegisterRoute(nameof(RegisterNewUserPage), typeof(RegisterNewUserPage));
             Routing.RegisterRoute(nameof(PropertiesListPage), typeof(PropertiesListPage));
             Routing.RegisterRoute(nameof(PropertyDetailsPage), typeof(PropertyDetailsPage));
+            Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
         }
 
         protected async override void OnAppearing()

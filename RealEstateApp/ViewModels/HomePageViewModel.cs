@@ -126,5 +126,11 @@ namespace RealEstateApp.ViewModels
             await Shell.Current.GoToAsync($"{nameof(PropertyDetailsPage)}?{nameof(PropertyDetailsViewModel.PropertyId)}={SelectedProperty.Id}");
             SelectedProperty = null;
         }
+
+        [RelayCommand]
+        private async Task GotoSearchPage()
+        {
+            await Shell.Current.GoToAsync(nameof(SearchPage));
+        }
     }
 }
