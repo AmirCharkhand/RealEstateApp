@@ -5,7 +5,8 @@
              xmlns:model="clr-namespace:RealEstateApp.Models"
              x:DataType="viewModel:SearchViewModel"
              x:Class="RealEstateApp.Views.SearchPage"
-             Shell.PresentationMode="ModalAnimated">
+             Shell.PresentationMode="ModalAnimated"
+             HideSoftInputOnTapped="True">
     <VerticalStackLayout>
         <Grid BackgroundColor="#2A5F73">
             <Grid.ColumnDefinitions>

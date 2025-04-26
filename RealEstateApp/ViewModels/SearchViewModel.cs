@@ -67,6 +67,7 @@ namespace RealEstateApp.ViewModels
             if (SelectedProperty == null)
                 return;
             await Shell.Current.GoToAsync($"{nameof(PropertyDetailsPage)}?{nameof(PropertyDetailsViewModel.PropertyId)}={SelectedProperty.Id}");
+            SelectedProperty=null;
         }
 
         [RelayCommand]
