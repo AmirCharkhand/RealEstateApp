@@ -1,4 +1,5 @@
-﻿using RealEstateApp.Services;
+﻿using RealEstateApp.Models;
+using RealEstateApp.Services;
 
 namespace RealEstateApp.Extensions
 {
@@ -8,7 +9,8 @@ namespace RealEstateApp.Extensions
         {
             return services
                 .AddSingleton<UriBuilderService>()
-                .AddSingleton<LoginInfoStorageService>();
+                .AddSingleton<LoginInfoStorageService>()
+                .AddScoped<SqliteService<BookmarkedProperty>>();
         }
     }
 }

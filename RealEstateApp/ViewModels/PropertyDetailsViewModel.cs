@@ -10,11 +10,14 @@ namespace RealEstateApp.ViewModels
     {
         private readonly IServiceProvider _serviceProvider = serviceProvider;
         private PropertyApiService PropertiApiService => _serviceProvider.GetRequiredService<PropertyApiService>();
+        private SqliteService<BookmarkedProperty> BookmarkedPropertySqlite => _serviceProvider.GetRequiredService<SqliteService<BookmarkedProperty>>();
 
         [ObservableProperty]
         private int _propertyId;
         [ObservableProperty]
         private Property? _property;
+        [ObservableProperty]
+        private string? _bookmarkIcon;
 
         public async Task InitializeAsync()
         {
@@ -24,7 +27,9 @@ namespace RealEstateApp.ViewModels
                 await GoBack();
                 return;
             }
-            await GetPropertyDetails();
+            await Task.WhenAll(
+                GetPropertyDetails(),
+                SetBookmarkIcon());
         }
 
         private async Task GetPropertyDetails()
@@ -43,6 +48,36 @@ namespace RealEstateApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private async Task SetBookmarkIcon()
+        {
+            var property = await BookmarkedPropertySqlite.GetItemAsync(PropertyId);
+            BookmarkIcon = property != null ? "bookmark_fill_icon" : "bookmark_empty_icon";
+        }
+
+        [RelayCommand]
+        private async Task ToggleBookmark()
+        {
+            if (Property == null)
+                throw new ArgumentNullException(nameof(Property));
+
+            var property = await BookmarkedPropertySqlite.GetItemAsync(PropertyId);
+            if (property != null)
+                await BookmarkedPropertySqlite.DeleteItemAsync(property);
+            else
+            {
+                var newProperty = new BookmarkedProperty
+                {
+                    Id = PropertyId,
+                    Name = Property.Name,
+                    Address = Property.Address,
+                    ImageUrl = Property.ImageUrl
+                };
+                await BookmarkedPropertySqlite.SaveItemAsync(newProperty);
+            }
+
+            await SetBookmarkIcon();
         }
 
         [RelayCommand]
