@@ -72,7 +72,8 @@ namespace RealEstateApp.ViewModels
                     Id = PropertyId,
                     Name = Property.Name,
                     Address = Property.Address,
-                    ImageUrl = Property.ImageUrl
+                    ImageUrl = Property.ImageUrl,
+                    Price = Property.Price,
                 };
                 await BookmarkedPropertySqlite.SaveItemAsync(newProperty);
             }
