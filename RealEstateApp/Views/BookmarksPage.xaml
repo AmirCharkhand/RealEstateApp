@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RealEstateApp.Views.BookmarksPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewModels="clr-namespace:RealEstateApp.ViewModels"
+             xmlns:models="clr-namespace:RealEstateApp.Models"
+             x:Class="RealEstateApp.Views.BookmarksPage"
+             x:DataType="viewModels:BookmarksViewModel">
+    <Grid Margin="10,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               Text="{Binding Title}"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="Medium"/>
+        <CollectionView  Margin="10"
+                         SelectionMode="Single"
+                         Grid.Row="1"
+                         ItemsSource="{Binding BookmarkedProperties}"
+                         SelectedItem="{Binding SelectedProperty}"
+                         SelectionChangedCommand="{Binding GoToPropertyDetailsPageCommand}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="20"
+                                   Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:BookmarkedProperty">
+                    <Border BackgroundColor="Transparent"
+                            Stroke="Transparent">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+                        <Grid BackgroundColor="White"
+                              Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="6*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0"
+                                    BackgroundColor="Transparent"
+                                    Stroke="Transparent">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10" />
+                                </Border.StrokeShape>
+                                <Image HeightRequest="120"
+                                       Aspect="Fill" 
+                                       Source="{Binding ImageUrl}"/>
+                            </Border>
+                            <StackLayout Grid.Column="1"
+                                         Margin="10,5,0,0"
+                                         Spacing="10">
+                                <Label FontSize="Medium"
+                                       FontAttributes="Bold" 
+                                       Text="{Binding Name}"/>
+
+                                <Label FontSize="Small"
+                                       TextColor="#848484" 
+                                       Text="{Binding Address}"/>
+                                <Label FontSize="Medium"
+                                       FontAttributes="Bold" 
+                                       Text="{Binding Price , StringFormat='${0}'}"/>
+                            </StackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
 </ContentPage>

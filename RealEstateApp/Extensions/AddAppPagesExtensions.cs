@@ -21,6 +21,7 @@ namespace RealEstateApp.Extensions
                 .AddTransient<SearchPage>()
                 .AddTransient<SearchViewModel>()
                 .AddSingleton<BookmarksPage>()
+                .AddSingleton<BookmarksViewModel>()
                 .AddSingleton<SettingsPage>();
         }
     }
