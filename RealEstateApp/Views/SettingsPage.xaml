@@ -1,11 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RealEstateApp.Views.SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewModel="clr-namespace:RealEstateApp.ViewModels"
+             x:Class="RealEstateApp.Views.SettingsPage"
+             x:DataType="viewModel:SettingsViewModel">
+    <Grid Margin="10,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               Text="{Binding Title}"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="Medium"/>
+        <VerticalStackLayout Margin="0,40,0,40"
+                             Spacing="20"
+                             Grid.Row="1">
+            <HorizontalStackLayout Spacing="20">
+                <Image Source="about_icon"
+                       HeightRequest="30"
+                       WidthRequest="30" />
+                <Label Text="About"
+                       VerticalOptions="Center"
+                       FontSize="Medium" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="20">
+                <Image Source="privacy_icon"
+                       HeightRequest="30"
+                       WidthRequest="30" />
+                <Label Text="Privacy &amp; Security"
+                       VerticalOptions="Center"
+                       FontSize="Medium" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="20">
+                <Image Source="faq_icon"
+                       HeightRequest="30"
+                       WidthRequest="30" />
+                <Label Text="Help and Support"
+                       VerticalOptions="Center"
+                       FontSize="Medium" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="20">
+                <Image Source="logout_icon"
+                       HeightRequest="30"
+                       WidthRequest="30" />
+                <Label Text="Logout"
+                       VerticalOptions="Center"
+                       FontSize="Medium" />
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>
