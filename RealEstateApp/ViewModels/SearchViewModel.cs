@@ -18,24 +18,11 @@ namespace RealEstateApp.ViewModels
         private Property? _selectedProperty;
         public ObservableCollection<Property> SearchResults { get; } = new ObservableCollection<Property>();
 
-        async partial void OnSearchTextChanged(string? value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                SearchResults.Clear();
-                return;
-            }
-            await Search();
-        }
-
         [RelayCommand]
         private async Task Search()
         {
             if (string.IsNullOrEmpty(SearchText))
-            {
-                await Shell.Current.DisplayAlert("Error", "Please enter a search term.", "OK");
                 return;
-            }
 
             SearchResults.Clear();
             try
