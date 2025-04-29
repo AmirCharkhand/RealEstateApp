@@ -14,15 +14,18 @@
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"/>
 
-    <TabBar Route="HomePage">
+    <TabBar>
         <ShellContent
             ContentTemplate="{DataTemplate views:HomePage}"
+            Route="HomePage"
             Icon="home_icon.png"/>
         <ShellContent
             ContentTemplate="{DataTemplate views:BookmarksPage}"
+            Route="BookmarksPage"
             Icon="bookmark_icon.png"/>
         <ShellContent
             ContentTemplate="{DataTemplate views:SettingsPage}"
+            Route="SettingsPage"
             Icon="settings_icon.png"/>
     </TabBar>
     
